@@ -1,0 +1,42 @@
+using System; 
+class coffeeBill
+{
+    static void Main() 
+    {
+        int totalcost=0;
+        Start:
+        Console.WriteLine("Please Select the size of the coffee :\n1--small\n2--Medium\n3--Large");
+        int choice=int.Parse(Console.ReadLine()); 
+        switch(choice) 
+        {
+            case 1:
+            totalcost=totalcost+10;  
+            break; 
+            case 2:
+            totalcost=totalcost+20;
+            break; 
+            case 3 : 
+            totalcost=totalcost+30; 
+            break; 
+            default:
+            Console.WriteLine("Invalid choice "); 
+            break;
+            
+        } 
+        Decide:
+        Console.WriteLine("Do you want anoter coffe :  yes or No");
+        string decision=Console.ReadLine(); 
+        switch(decision.ToUpper()) 
+        {
+            case "YES": 
+            goto Start; 
+            case "NO":
+            break; 
+            default : 
+            Console.WriteLine("Your choice {0}  is invalid!",decision);
+            goto Decide; 
+        } 
+        Console.WriteLine("Thanks for Visiting -- Have a good day");
+        Console.WriteLine("Your Total Bill is {0}",totalcost);
+    }
+}

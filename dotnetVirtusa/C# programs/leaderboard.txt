@@ -1,0 +1,34 @@
+Write a program for leader board position
+input1:11
+input2:21 19 20 18 17 19 16 15 9 11 1      
+output: 11 15 16 19 20 21 
+
+
+using System;
+ 
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        int a = Convert.ToInt32(Console.ReadLine());
+ 
+        //string str=Console.ReadLine();
+        string rts=Console.ReadLine();
+        string[] str=rts.Split(" ");
+        int[] arr=new int[a];
+        for(int i=0;i<a;i++)
+        {
+            arr[i]=Convert.ToInt32(str[i]);
+        }
+        int k=arr[a-1];
+        for(int j=a-2;j>=0;j--)
+        {
+            if(arr[j]>k)
+            {
+                Console.Write(arr[j]+" ");
+                k=arr[j];
+ 
+            }
+        }
+    }
+}

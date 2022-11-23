@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        *{
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    /* border: 1px solid red; */
+}
+:root{
+    --gray-clr:#f1f3f4;
+    --dark-gray-clr:#e3e4e7;
+    --light-black-clr:#8c8d8d;
+    --red-clr:#c4221e;
+    --green-clr:#198138;
+    --text-clr:#5f6368;
+    --black-clr:#202124;
+}
+.material-icons,.side-panel img {
+    margin: 0.25rem 0.25rem;
+    cursor: pointer;
+    border-radius: 50rem;
+    padding: 0.42rem;
+    height: 40px;
+    width: 40px;
+    color: var(--drk-gray-clr);
+}
+.material-icons:hover{
+    background: var(--dark-gray-clr);
+}
+.flex{
+    display: flex;
+    align-items: center;
+    flex-wrap: initial;
+}
+.flex-c{
+    display: flex;
+    align-items: center;
+    flex-wrap: initial;
+    flex-direction: column;
+}
+.search-input{
+    border:0.5px solid var(--dark-gray-clr);
+    height: 3rem;
+    border-radius: 5px;
+    background: var(--gray-clr);
+    max-width: 720px;
+    min-width: 250px;
+    width: calc(100vw - 525px);
+}
+.search{
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding-left: 1rem;
+    background: transparent;
+    font: normal 16px Google Sans,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+}
+input:focus, textarea:focus, select:focus{
+    outline: none;
+}
+input{
+    border-radius: 1px;
+    min-width: none;
+}
+.mic{
+    padding: 0.5rem;
+}
+.navbar{
+    justify-content: space-between;
+    padding: 0.2rem 0.5rem;
+    border-bottom: 2px solid var(--gray-clr);
+}
+.nav-img{
+    border-radius: 50%;
+    margin: 0.5rem 1rem;
+}
+.Logo{
+    padding: 0.5rem 1rem;
+}
+.main-container{
+    height: calc(100vh - 4.6rem);
+}
+.main-container > div{
+    height: calc(100vh - 4.6rem);
+}
+.left-panel{
+    width: 5rem;
+    transition: width 0.25s ease-in;
+    flex-direction: column;
+}
+.left-panel:hover{
+    width: 5rem;
+}
+.left-first-section{
+    flex-direction: column;
+}
+.mid-panel{
+    width:100vw;
+}
+.menu{
+    height: 3rem;
+    width: 100%;
+}
+.mails-section{
+    width: 100%;
+    height: 100%;
+}
+.side-panel{
+    width: 3rem;
+    flex-direction: column;
+}
+.side-panel img,.side-panel div{
+    height: 40px;
+    width: 40px;
+}
+.break{
+    height: 0;
+    width: 2px;
+}
+.search-icon{
+    height: 2rem;
+    width: 2rem;
+    padding: 3px;
+}
+.compose{
+    margin: 0.5rem 1rem;
+    height: 3.5rem;
+    width: 3.5rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow:0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+}
+.left-panel .material-icons,.mail .material-icons{
+    font-size: 1.3rem;
+    margin: 0.2rem 0;
+    padding: 0.4rem 0.3rem;
+    height: 2rem;
+    width: 2rem;
+}
+.border-bottom{
+    border-bottom: 1px solid var(--dark-gray-clr);
+}
+.active{
+    background: rgba(253,232,231,255);
+    color: var(--red-clr);
+}
+.active::after{
+    position: absolute;
+    content: "452";
+    background: var(--red-clr);
+    height: 1rem;
+    width: 1.8rem;
+    transform: translate(-1rem,-5px);
+    border-radius: 50rem;
+}
+.section{
+    height: 3rem;
+    width: 100%;
+    justify-content: space-between;
+}
+.menu{
+    height: 4rem;
+}
+.all-mails{
+    width: 100%;
+    height: calc(100% - 7rem);
+    overflow: scroll;
+}
+.menu-1,.menu-2{
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    width: fit-content;
+    height: 3rem;
+}
+.menu-1{
+    margin-left: 0.25rem;
+    padding-top: 10px;
+}
+.menu-2{
+    padding-top: 10px;
+}
+.right span{
+    width: fit-content;
+    font-size: 0.8rem;
+    margin: 1.1rem;
+}
+.text{
+    margin: 0 1rem;
+    font-size: 0.8rem;
+    color: var(--txt-clr);
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0.75rem;
+}
+.text:hover{
+    padding: 0.75rem;
+    margin: 0;
+}
+.section>div>div{
+    color: var(--light-black-clr);
+    transition: all 0.2s ease-in;
+}
+.disabled-btn{
+    color: var(--gray-clr) !important;
+}
+.disabled-btn:hover{
+    background: none !important;
+}
+.menu-element{
+    display: flex;
+    width: 15rem;
+    margin: 0;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    padding: 0 0.5rem;
+    cursor: pointer;
+    height: 3.5rem;
+}
+.menu-element:hover,.text:hover{
+    background: var(--dark-gray-clr);
+}
+.menu-element:hover .menu-icon,.menu-element:hover .menu-title,.section>div>div:hover{
+    color: var(--black-clr);
+}
+.menu-icon{
+    margin: 0 0.5rem;
+    color: var(--text-clr);
+}
+.menu-icon:hover{
+    color: black;
+}
+.menu-title{
+    width: fit-content;
+    height: fit-content;
+    font-family: 'Google Sans', Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    font-size: .875rem;
+    color: var(--text-clr);
+    font-weight: 500;
+}
+.active-menu::after{
+    content: "";
+    height: 3px;
+    width: 14rem;
+    background: var(--red-clr);
+    position: absolute;
+    transform: translateY(1.55rem);
+    border-radius: 5rem 5rem 0 0;
+}
+.active-menu .menu-icon,.active-menu .menu-title{
+    color: var(--red-clr);
+}
+.mail{
+    height: 2.5rem;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-clr);
+    background: var(--gray-clr);
+    border: 1px solid var(--dark-gray-clr);
+    border-width: 1px 0;
+    padding: 0 0.5rem ;
+}
+.mail .material-icons{
+    font-size: 1.2rem;
+    height: 40px;
+    width: 40px;
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+}
+.mail-title{
+    width: 20vw;
+    min-width: 100px;
+    max-width: 300px;
+}
+.mail-content{
+    overflow: hidden;
+    width: 35rem;
+}
+.mail-content::after{
+    content: "...";
+}
+strong{
+    color: var(--black-clr);
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" c>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar flex">
+        <div class="firstNavbarSection flex">
+            <div class="ytListIcon material-icons">
+                reorder
+            </div>
+            <div class="Logo">
+                <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_2x_r2.png"
+                    style="height: 35px;" alt="" class="yt-img">
+            </div>
+        </div>
+        <div class="middleNavbarSection flex">
+            <form class="flex">
+                <div class="search-input flex">
+                    <div class="material-icons search-icon">search</div>
+                    <input type="text" name="search" class="search" placeholder="Search Mail">
+                    <div class="material-icons tune-icon">tune</div>
+                </div>
+            </form>
+        </div>
+        <div class="lastNavbarSection flex">
+            <div class="material-icons">help_outline</div>
+            <div class="material-icons notification">settings</div>
+            <div class="material-icons">apps</div>
+            <a href="http://accounts.google.com" class="nav-btn"><img class="nav-img"
+                    src="https://lh3.googleusercontent.com/ogw/ADea4I7tGJ96q1dHsBIsLlt2spjt2MInZO0Uk9jvwIIlPQ=s32-c-mo"
+                    alt=""></a>
+        </div>
+    </div>
+    <div class="main-container flex">
+        <div class="left-panel flex">
+            <div class="compose flex"><img
+                    src="https://www.gstatic.com/images/icons/material/colored_icons/1x/create_32dp.png" alt="Compose">
+            </div>
+            <div class="left-first-section border-bottom flex-c">
+                <div class="material-icons active">inbox</div>
+                <div class="material-icons">star</div>
+                <div class="material-icons">schedule</div>
+                <div class="material-icons">send</div>
+                <div class="material-icons">task</div>
+                <div class="material-icons">label</div>
+                <div class="material-icons">expand_more</div>
+            </div>
+            <div class="left-second-section border-bottom flex-c">
+                <div class="material-icons">duo</div>
+                <div class="material-icons">videocam</div>
+                <div class="material-icons">keyboard</div>
+            </div>
+            <div class="left-third-section border-bottom ">
+                <a href="http://accounts.google.com" class="nav-btn">
+                    <img class="nav-img"
+                        src="https://lh3.googleusercontent.com/ogw/ADea4I7tGJ96q1dHsBIsLlt2spjt2MInZO0Uk9jvwIIlPQ=s32-c-mo"
+                        alt="">
+                </a>
+            </div>
+        </div>
+        <div class="mid-panel flex-c">
+            <div class="section flex">
+                <div class="left flex">
+                    <div class="material-icons menu-1">check_box_outline_blank</div>
+                    <div class="material-icons menu-2">arrow_drop_down</div>
+                    <div class="material-icons menu-3">refresh</div>
+                    <div class="material-icons menu-4">more_vert</div>
+                </div>
+                <div class="right flex">
+                    <div class="text">1-42 of 42</div>
+                    <div class="material-icons menu-5 disabled-btn">chevron_left</div>
+                    <div class="material-icons menu-5 ">chevron_right</div>
+                </div>
+            </div>
+            <div class="menu flex">
+                <div class="menu-element active-menu">
+                    <div class="menu-icon material-icons">inbox</div>
+                    <div class="menu-title">Primary</div>
+                </div>
+                <div class="menu-element">
+                    <div class="menu-icon material-icons">group</div>
+                    <div class="menu-title">Social</div>
+                </div>
+                <div class="menu-element">
+                    <div class="menu-icon material-icons">sell</div>
+                    <div class="menu-title">Promotions</div>
+                </div>
+            </div>
+            <div class="all-mails flex-c">
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Amazon </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Your resume got selected </strong> take your test all the best!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 12</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Internshala </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Here are some latest internships </strong> these internships suits your skills apply asap!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 12</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Virtusa </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>congratulations! </strong>your offer letter is ready!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 12</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong>Hexaware </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Webinar </strong> Join the webinar</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 11</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> LearnTricks </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>check the latest courses </strong> get the courses 50% off</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 11</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Coursera </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>python</strong> complete the course!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 11</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Atom </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>editorial! </strong>you have signed the atom editorial</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 11</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Coding ninjas </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>grab the opportunity </strong> Take the test and get up to 100%off on the courses!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 11</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Hackerrank </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Solve the problem </strong> arrays and linkedlists </div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 10</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong>Unstop opportunities </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>apply now</strong> Apply now for different companies in an easy way!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 10</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Cambly </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>What is the best way to learn English? </strong> learn english through webinars</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 10</div>
+                    </div>
+                </div>
+                
+                
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Amazon </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Best of luck! </strong> here is your test link</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 9</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Kaggle </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Here are your datasets</strong> Get the datasets for free!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 8</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Team Relevel </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Have your Heard?</strong> Take up the tests for various companies through relevel!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 8</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Hexaware </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Here is your communication test</strong> Take up the test through this link!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 8</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Infosys </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Your offer letter is ready!</strong> your offer and joining letter is ready</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 8</div>
+                    </div>
+                </div>
+                
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Codechef </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Coding contests! </strong> Participate in various contests</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 6</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong>Hackerearth </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Hackathon! </strong> Participate in various hackathons</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 5</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Codechef </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Coding contests </strong> improve your coding skills through contests</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 5</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Coursera </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Programming for everybody! </strong> complete your course before the deadline!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time"> Aug 4</div>
+                    </div>
+                </div>
+                <div class="mail flex">
+                    <div class="first-section flex">
+                        <div class="material-icons">check_box_outline_blank</div>
+                        <div class="material-icons">star</div>
+                        <div class="mail-title"><strong> Virtusa </strong></div>
+                    </div>
+                    <div class="mid-section">
+                        <div class="mail-content"> <strong>Complete the course </strong> complete the course and take up the assignment before the deadline!</div>
+                    </div>
+                    <div class="end-section">
+                        <div class="mail-time">Aug 3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="side-panel flex-c">
+            <img src="https://www.gstatic.com/companion/icon_assets/calendar_2020q4_2x.png" alt="">
+            <img src="https://www.gstatic.com/companion/icon_assets/keep_2020q4v3_2x.png" alt="">
+            <img src="https://www.gstatic.com/companion/icon_assets/tasks2_2x.png" alt="">
+            <img src="https://www.gstatic.com/companion/icon_assets/contacts_2x.png" alt="">
+            <div class="material-icons">add</div>
+        </div>
+    </div>
+</body>
+
+</html>
